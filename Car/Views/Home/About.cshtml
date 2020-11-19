@@ -1,7 +1,77 @@
-﻿@{
+﻿@using System.Web.UI.WebControls
+@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+    <div class="jumbotron">
+        <h2>@ViewBag.Title.</h2>
+        <h3>@ViewBag.Message</h3>
+        <p>Use this area to provide additional information.</p>
+        @{Html.RenderPartial("Partial");}
+
+        <br />
+
+
+        <form method="post" action="../Home/Buy">
+            <input type="hidden" value="@ViewBag.CarId" name="CarId" />
+            <table>
+                <tr><th><p>Введите свое имя </p></th></tr>
+                <tr><td><input type="text" name="Person" autocomplate="off" /></td></tr>
+                <tr><th><p>Введите адресс </p></th></tr>
+                <tr><td><input type="text" name="Adress" autocomplate="off" /></td></tr>
+                <tr><td><input type="submit" value="Send" /></td></tr>
+            </table>
+        </form>
+
+        <br />
+        <br />
+        @using (Html.BeginForm("Buy", "Home", FormMethod.Post))
+        {
+            <input type="hidden" value="@ViewBag.CarId" name="CarId" />
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <th><p>Введите свое имя</p></th>
+                    <td><p><input type="text" name="Person" /></p></td>
+                </tr>
+                <tr>
+                    <th><p>Введите адресс</p></th>
+                    <td><p><input type="text" name="Adress" /></p></td>
+                </tr>
+                <tr><th><p><input type="submit" value="Send" /></p></th></tr>
+            </table>
+        }
+
+        @using (Html.BeginForm("Buy", "Home", FormMethod.Post))
+        {
+            //<input type="hidden" value="@ViewBag.CarId" name="CarId" />
+            @Html.Hidden("BookId", "@ViewBag.CarId")
+            <table class="table table-bordered table-responsive">
+                <tr>
+                    <th><p>Введите свое имя</p></th>
+                    <td>@Html.TextBox("Person")</td>
+                </tr>
+                <tr>
+                    <th><p>Введите адресс</p></th>
+                    <td>@Html.TextBox("Adress", "Adress")</td>
+
+                </tr>
+                <tr><th> @Html.TextArea("text", "привет <br/> мир")</th></tr>
+                <tr><th><p><input type="submit" value="Send" /></p></th></tr>
+                <tr><th><p>
+                    @Html.RadioButton("color", "red")
+                    <span>красный</span> <br />
+                    @Html.RadioButton("color", "blue")
+                    <span>синий</span> <br />
+                    @Html.RadioButton("color", "green", true)
+                    <span>зеленый</span>
+                </p></th></tr>
+                <tr><td>@Html.DropDownList("countires", new SelectList(new string[] { "Russia", "USA", "Canada", "France" }), "Countries")</td></tr>
+            </table>
+        }
+
+
+    </div>
+
+
+
+

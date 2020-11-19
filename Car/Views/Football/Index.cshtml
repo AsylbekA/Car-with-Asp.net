@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Car.Models.Player>
+@{
+    Layout = "~/Views/Shared/_LayoutFootball.cshtml";
+}
+<br />
+<p>
+    @Html.ActionLink("Create New", "CreatePlayer")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Team.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Position)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditPlayer", new { id = item.Id }) |
+                @Html.ActionLink("Details", "PlayerDetails", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeletePlayer", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Каталог колманд", "ListTeams")
+</p>
+@section Footer
+{
+    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+}
+
+
